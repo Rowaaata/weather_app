@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:weather_app/Pages/weather_home_page.dart';
+import 'features/weather/presentation/Pages/weather_home_page.dart';
 
 void main() => runApp(const MyApp());
 
@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: WeatherHomePage()
+        home: weather_home_page()
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/icons/icons.dart';
-import 'package:weather_app/services/weather_service.dart';
-import 'package:weather_app/models/weather_api.dart';
+import 'package:weather_app/features/icons/icons.dart';
+import 'package:weather_app/features/services/weather_service.dart';
 import 'package:lottie/lottie.dart';
 
 class Header extends StatefulWidget {
