@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.top]);
     return const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Drawer_widget()
+        home: weather_home_page()
     );
   }
 }
