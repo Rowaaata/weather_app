@@ -1,11 +1,14 @@
 import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:weather_app/features/colors/colors.dart';
 import 'package:weather_app/features/icons/icons.dart';
 import 'package:weather_app/features/models/weather_api.dart';
 import 'package:weather_app/features/services/weather_service.dart';
+
 import '../../../loading/loading_page.dart';
+import 'Drawer.dart';
 import 'forecast_card.dart';
 import 'header.dart';
 import 'info_card.dart';
@@ -130,61 +133,67 @@ class _WeatherHomePageState extends State<WeatherHomeWidget> {
   Widget build(BuildContext context) => _isLoadinf
       ? LoadingPage()
       : Scaffold(
-    appBar: PreferredSize(
-        preferredSize: Size.fromHeight(300),
-        child: Header(
-            backgroundColor: defaultColor,
-            city_name: weather.city,
-            description: weather.text,
-            descriptionIMG: loadingIcon,
-            state_name: weather.state,
-            temp: weather.temp)),
-    body: Container(
-      decoration: BoxDecoration(
-          gradient: isday
-              ? LinearGradient(
-              begin: const Alignment(-1.5, 8),
-              end: const Alignment(-1.5, -0.5),
-              colors: [Colors.white, defaultColor])
-              : LinearGradient(
-              begin: const Alignment(-1.5, 8),
-              end: const Alignment(-1.5, -0.5),
-              colors: [Colors.white, defaultColor])),
-      child: CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: <Widget>[
-          SliverToBoxAdapter(
-            child: Container(
-              height: 200,
-              width: MediaQuery.of(context).size.width,
-              color: Color.fromARGB(0, 255, 255, 255),
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                physics: BouncingScrollPhysics(),
-                itemCount: weather.forecast.length - hour - 1,
-                itemBuilder: (context, index) => SingleChildScrollView(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 7, vertical: 5),
-                  child: Center(
-                      child: ForecastCard(
-                          hour: weather.forecast[hour + index]['time']
-                              .toString()
-                              .split(' ')[1],
-                          averageTemp: weather.forecast[hour + index]
-                          ['temp_c'],
-                          description: weather.forecast[hour + index]
-                          ['condition']['text'],
-                          descriptionIMG: weather.forecast[hour + index]
-                          ['condition']['icon']
-                              .toString()
-                              .replaceAll('//', 'http://'))),
+          drawer: Drawer_widget(),
+          appBar: PreferredSize(
+              preferredSize: Size.fromHeight(300),
+              child: Header(
+                  backgroundColor: defaultColor,
+                  city_name: weather.city,
+                  description: weather.text,
+                  descriptionIMG: loadingIcon,
+                  state_name: weather.state,
+                  temp: weather.temp)),
+          body: Container(
+            decoration: BoxDecoration(
+                gradient: isday
+                    ? LinearGradient(
+                        begin: const Alignment(-1.5, 8),
+                        end: const Alignment(-1.5, -0.5),
+                        colors: [Colors.white, defaultColor])
+                    : LinearGradient(
+                        begin: const Alignment(-1.5, 8),
+                        end: const Alignment(-1.5, -0.5),
+                        colors: [Colors.white, defaultColor])),
+            child: CustomScrollView(
+              physics: BouncingScrollPhysics(),
+              slivers: <Widget>[
+                SliverToBoxAdapter(
+                  child: Container(
+                    height: 200,
+                    width: MediaQuery.of(context).size.width,
+                    color: Color.fromARGB(0, 255, 255, 255),
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      physics: BouncingScrollPhysics(),
+                      itemCount: weather.forecast.length - hour - 1,
+                      itemBuilder: (context, index) => SingleChildScrollView(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 7, vertical: 5),
+                        child: Center(
+                            child: ForecastCard(
+                                hour: weather.forecast[hour + index]['time']
+                                    .toString()
+                                    .split(' ')[1],
+                                averageTemp: weather.forecast[hour + index]
+                                    ['temp_c'],
+                                description: weather.forecast[hour + index]
+                                    ['condition']['text'],
+                                descriptionIMG: weather.forecast[hour + index]
+                                        ['condition']['icon']
+                                    .toString()
+                                    .replaceAll('//', 'http://'))),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                SliverToBoxAdapter(
+                  child: InformartionsCard(
+                      humidity: weather.humidity,
+                      uvIndex: weather.uvIndex,
+                      wind: weather.wind),
+                )
+              ],
             ),
           ),
-          SliverToBoxAdapter(child: InformartionsCard(humidity: weather.humidity, uvIndex: weather.uvIndex, wind: weather.wind),)
-        ],
-      ),
-    ),
-  );
+        );
 }

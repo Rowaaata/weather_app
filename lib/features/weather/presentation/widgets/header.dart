@@ -100,7 +100,7 @@ class _HeaderState extends State<Header> {
                       Column(
                         children: [
                           SizedBox(
-                            width: 200,
+                           // width: 200,
                             child: Text(
                               widget.temp.toString() + '°',
                               style: const TextStyle(
@@ -108,7 +108,7 @@ class _HeaderState extends State<Header> {
                             ),
                           ),
                           SizedBox(
-                            width: 200,
+                           // width: 200,
                             child: Text(
                               widget.city_name,
                               style: TextStyle(fontSize: 25),
@@ -116,7 +116,7 @@ class _HeaderState extends State<Header> {
                           ),
                           const SizedBox(height: 5),
                           SizedBox(
-                            width: 200,
+                           // width: 200,
                             child: Text(
                               widget.state_name,
                               style: const TextStyle(
@@ -126,7 +126,7 @@ class _HeaderState extends State<Header> {
                           ),
                         ],
                       ),
-                      const Spacer(),
+                     // const Spacer(),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 15),
                         child: Container(
