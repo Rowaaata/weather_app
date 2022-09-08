@@ -51,7 +51,7 @@ class _HeaderState extends State<Header> {
             _isLoadinf
                 ? Lottie.network(rainyIcon, height: 50)
                 : Container(
-                    width: 700,
+                    width: 900,
                     height: 50,
                     child: TextField(
                       controller: _textfieldController,
@@ -126,7 +126,7 @@ class _HeaderState extends State<Header> {
                           ),
                         ],
                       ),
-                     // const Spacer(),
+                     SizedBox(width: 40,),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 15),
                         child: Container(
